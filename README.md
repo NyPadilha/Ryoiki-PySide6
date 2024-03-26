@@ -1,1 +1,6 @@
-# Ryoiki-PySide6
+# Ryoiki
+
+- WatchList
+- Metas
+- Finance
+- Travels

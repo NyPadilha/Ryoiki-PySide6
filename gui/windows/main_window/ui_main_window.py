@@ -16,6 +16,7 @@
 
 # qt core
 from qt_core import *
+from gui.pages.ui_pages import Ui_StackedWidget
 
 
 # main window
@@ -39,12 +40,27 @@ class UI_MainWindow(object):
 
         # title bar
         self.top_bar = QFrame()
-        self.top_bar.setMinimumHeight(40)
-        self.top_bar.setMaximumHeight(40)
+        self.top_bar.setMinimumHeight(30)
+        self.top_bar.setMaximumHeight(30)
 
         # content
         self.content = QFrame()
         self.content.setStyleSheet("background-color: #444")
+
+        # content layout
+        self.content_layout = QVBoxLayout(self.content)
+        self.content_layout.setContentsMargins(0, 0, 0, 0)
+        self.content_layout.setSpacing(0)
+
+        # pages
+        self.pages = QStackedWidget()
+        self.pages.setStyleSheet("font-size: 20px; color: #FFF")
+        self.ui_pages = Ui_StackedWidget()
+        self.ui_pages.setupUi(self.pages)
+        self.pages.setCurrentWidget(self.ui_pages.home_page)
+
+        # add widgets to content layout
+        self.content_layout.addWidget(self.pages)
 
         # add widgets to main layout
         self.main_layout.addWidget(self.top_bar)

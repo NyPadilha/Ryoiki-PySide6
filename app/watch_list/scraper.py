@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 from typing import List, Dict, Any
 
 
+# fetches the MAL Seasonal Anime page
 def fetch():
     url = 'https://myanimelist.net/anime/season'
     response = requests.get(url)
@@ -13,6 +14,7 @@ def fetch():
         return 'Error fetching page'
 
 
+# formats the anime data into a dictionary
 def anime_formatter(anime: Any):
     date = anime.find('span', {"class": 'js-start_date'}).text[4:]
     formatted_date = f'{date[2:]}/{date[:2]}'
@@ -28,6 +30,7 @@ def anime_formatter(anime: Any):
     }
 
 
+# scrapes the MAL Seasonal Anime page and returns a list of anime
 def new_season():
     soup = BeautifulSoup(fetch(), 'html.parser')
 

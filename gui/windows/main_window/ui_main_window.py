@@ -85,7 +85,6 @@ class UI_MainWindow(object):
 
         # pages
         self.pages = QStackedWidget()
-        self.pages.setStyleSheet("font-size: 20px; color: #FFF")
         self.ui_pages = Ui_StackedWidget()
         self.ui_pages.setupUi(self.pages)
         self.pages.setCurrentWidget(self.ui_pages.home_page)

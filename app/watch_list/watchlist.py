@@ -1,13 +1,14 @@
 import os
 import json
 from scraper import NewSeasonScraper
-from typing import List, Dict, Any
+from typing import List
+from interfaces import AnimeI
 
 
 class WatchList:
     def __init__(self):
         self.path = "database/anime_list.json"
-        self.anime_list: List[Dict[str, Any]] = []
+        self.anime_list: List[AnimeI] = []
 
     def create_anime_list(self):
         with open(self.path, "w") as file:
@@ -22,11 +23,23 @@ class WatchList:
             with open(self.path, "r") as file:
                 self.new_season = json.load(file)
 
-    def add_anime(self): ...
+    def add_anime(self, anime: AnimeI):
+        self.anime_list.append(anime)
+        self.create_anime_list()
 
-    def remove_anime(self): ...
+    def remove_anime(self, anime_title: str):
+        self.anime_list = [
+            anime for anime in self.anime_list if anime["title"] != anime_title
+        ]
+        self.create_anime_list()
 
-    def update_anime(self): ...
+    def update_anime(self, anime_title: str, new_data: AnimeI):
+        for anime in self.anime_list:
+            if anime["title"] == anime_title:
+                anime.update(new_data)
+                break
+
+        self.create_anime_list()
 
 
 class NewSeason:
@@ -51,7 +64,7 @@ class NewSeason:
             with open(self.path, "r") as file:
                 self.new_season = json.load(file)
 
-    def remove_anime(self, anime_title):
+    def remove_anime(self, anime_title: str):
         self.new_season = [
             anime for anime in self.new_season if anime["title"] != anime_title
         ]

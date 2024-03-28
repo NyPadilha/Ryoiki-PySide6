@@ -1,12 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-from typing import List, Dict, Any
+from typing import List, Any
+from interfaces import NewSeasonAnimeI
 
 
 class NewSeasonScraper:
     def __init__(self):
         self.url = "https://myanimelist.net/anime/season"
-        self.new_season: List[Dict[str, Any]] = []
+        self.new_season: List[NewSeasonAnimeI] = []
 
     # fetches the MAL Seasonal Anime page
     def fetch(self):
@@ -18,7 +19,7 @@ class NewSeasonScraper:
             return "Error fetching page"
 
     # formats the anime data into a dictionary
-    def anime_formatter(self, anime: Any):
+    def anime_formatter(self, anime: Any) -> NewSeasonAnimeI:
         date = anime.find("span", {"class": "js-start_date"}).text[4:]
         formatted_date = f"{date[2:]}/{date[:2]}"
 
@@ -36,7 +37,7 @@ class NewSeasonScraper:
     def get_new_season(self):
         soup = BeautifulSoup(self.fetch(), "html.parser")
 
-        season: List[Dict[str, Any]] = []
+        season: List[NewSeasonAnimeI] = []
 
         for anime in soup.find_all(
             "div",

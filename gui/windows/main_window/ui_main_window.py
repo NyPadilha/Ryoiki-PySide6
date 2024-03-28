@@ -21,7 +21,7 @@ from gui.pages.ui_pages import Ui_StackedWidget
 
 # main window
 class UI_MainWindow(object):
-    def setup_ui(self, parent):
+    def setup_ui(self, parent: QMainWindow):
         if not parent.objectName():
             parent.setObjectName("MainWindow")
 
@@ -66,7 +66,8 @@ class UI_MainWindow(object):
         self.plus_button.setMaximumWidth(30)
 
         self.spacer = QSpacerItem(
-            20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)  # type: ignore
+            20, 20, QSizePolicy.Expanding, QSizePolicy.Minimum  # type: ignore
+        )
 
         # add widgets to top bar layout
         self.top_bar_layout.addWidget(self.home_button)
@@ -86,7 +87,7 @@ class UI_MainWindow(object):
         # pages
         self.pages = QStackedWidget()
         self.ui_pages = Ui_StackedWidget()
-        self.ui_pages.setupUi(self.pages)
+        self.ui_pages.setupUi(self.pages)  # type: ignore
         self.pages.setCurrentWidget(self.ui_pages.home_page)
 
         # add widgets to content layout

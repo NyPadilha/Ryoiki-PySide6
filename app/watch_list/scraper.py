@@ -51,6 +51,7 @@ class NewSeasonScraper:
                 a = self.anime_formatter(anime)
                 season.append(a)
 
+        # I didnt change the NewSeason to Dict like other datas because of this sorting
         self.new_season = sorted(season, key=lambda anime: anime["start_date"])
 
         return self.new_season

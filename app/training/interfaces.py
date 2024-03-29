@@ -1,11 +1,12 @@
-from typing import TypedDict, List
+from typing import TypedDict, List, Literal, Union
 
 
-class ExerciseI(TypedDict):
+class ExerciseI(TypedDict, total=False):
     name: str
-    sets: int
-    reps: int
-    weight: int
+    type: Literal["endurance", "reps"]
+    config: Union[int, str]
+    video: str
+    image: str
 
 
 class TrainingI(TypedDict):
